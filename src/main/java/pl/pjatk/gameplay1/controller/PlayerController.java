@@ -70,6 +70,12 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.attack(attackerId, defenderId));
 
     }
+
+//    @GetMapping("/attacker/{attackerId}/defender/{defenderId}")
+//    public ResponseEntity<Player> defendPlayer(@PathVariable Long attackerId, @PathVariable Long defenderId) {
+//        return ResponseEntity.ok(playerService.defend(attackerId, defenderId));
+//
+//    }
 }
 
 

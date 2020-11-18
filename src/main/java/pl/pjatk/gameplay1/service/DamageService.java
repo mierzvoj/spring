@@ -12,15 +12,32 @@ public class DamageService {
         this.defender = defender;
     }
 
-    public Player attack(Player attacker) {
+    public static Player defend(Player attacker, Player defender) {
 
-        attacker.setHealth(attacker.getHealth() - 10);
+        int newhealth;
+
+        newhealth = defender.getHealth() - attacker.getDamage();
+
+        if(newhealth < 0){
+            newhealth = 0;
+        }
+
+        defender.setHealth(newhealth);
+        return defender;
+    }
+
+    public static Player attack(Player attacker, Player defender) {
+
+        int newhealth;
+
+        newhealth = defender.getHealth() - attacker.getDamage();
+
+        if(newhealth < 0){
+            newhealth = 0;
+        }
+
+        attacker.setHealth(newhealth);
         return attacker;
     }
 
-    public Player defend(Player defender) {
-
-        defender.setDamage(defender.getDamage() + 10);
-        return defender;
-    }
 }

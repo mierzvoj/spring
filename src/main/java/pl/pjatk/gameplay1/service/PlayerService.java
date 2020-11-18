@@ -12,6 +12,7 @@ public class PlayerService {
 
     private PlayerRepository playerRepository;
     private PlayerMapper playerMapper;
+    private DamageService damageService;
 
     public PlayerService(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
@@ -55,12 +56,22 @@ public class PlayerService {
         return playerRepository.save(dbPlayer);
     }
 
-        public Player attack (Long attackerId, Long defenderId){
-            Optional<Player> attacker = playerRepository.findById(attackerId);
-            Optional<Player> defender = playerRepository.findById(defenderId);
+    public Player attack(Long attackerId, Long defenderId) {
+        Player attacker = playerRepository.findById(attackerId).get();
+        Player defender = playerRepository.findById(defenderId).get();
 
-            return null;
+        attacker = DamageService.attack(attacker, defender);
 
-        }
+        return playerRepository.save(attacker);
 
     }
+//    public Player defend(Long attackerId, Long defenderId) {
+//        Player attacker = playerRepository.findById(attackerId).get();
+//        Player defender = playerRepository.findById(defenderId).get();
+//
+//        defender = DamageService.defend(attacker, defender);
+//
+//        return playerRepository.save(defender);
+//
+//    }
+}
