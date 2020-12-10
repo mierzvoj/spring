@@ -1,7 +1,9 @@
 package pl.pjatk.gameplay1.model;
 
-import javax.persistence.*;
+import org.springframework.stereotype.*;
 
+import javax.persistence.*;
+//@Service
 @Entity
 public class Player {
 

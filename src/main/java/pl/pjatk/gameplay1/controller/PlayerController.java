@@ -14,13 +14,14 @@ public class PlayerController {
     //localhost/8080, żądanie player/
 
     private PlayerService playerService;
+    private DamageService damageService;
 
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(PlayerService playerService, DamageService damageService) {
         this.playerService = playerService;
+        this.damageService = damageService;
     }
 
     @GetMapping
-
 
     public ResponseEntity<List<Player>> findAll() {
         return ResponseEntity.ok(playerService.findAll());
@@ -61,8 +62,8 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Player> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO player) {
-        return ResponseEntity.ok(playerService.updatePlayer(id, player));
+    public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
+        return ResponseEntity.ok(playerService.updatePlayer(player));
     }
 
     @GetMapping("/attacker/{attackerId}/defender/{defenderId}")

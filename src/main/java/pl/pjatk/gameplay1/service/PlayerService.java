@@ -11,11 +11,12 @@ import java.util.*;
 public class PlayerService {
 
     private PlayerRepository playerRepository;
-    private PlayerMapper playerMapper;
+
     private DamageService damageService;
 
-    public PlayerService(PlayerRepository playerRepository) {
+    public PlayerService(PlayerRepository playerRepository, DamageService damageService) {
         this.playerRepository = playerRepository;
+        this.damageService = damageService;
     }
 
 
@@ -40,20 +41,10 @@ public class PlayerService {
         playerRepository.deleteById(id);
     }
 
-    public Player updatePlayer(Long id, PlayerDTO playerWithUpdatesProperties) {
-        Player dbPlayer = playerRepository.findById(id).get();
+    public Player updatePlayer(Player player) {
 
-        if (playerWithUpdatesProperties.getHealth() != null) {
-            dbPlayer.setHealth(playerWithUpdatesProperties.getHealth());
-        }
-        if (playerWithUpdatesProperties.getDamage() != null) {
-            dbPlayer.setDamage(playerWithUpdatesProperties.getDamage());
-        }
 
-        if (playerWithUpdatesProperties.getName() != null) {
-            dbPlayer.setName(playerWithUpdatesProperties.getName());
-        }
-        return playerRepository.save(dbPlayer);
+        return playerRepository.save(player);
     }
 
     public Player attack(Long attackerId, Long defenderId) {
