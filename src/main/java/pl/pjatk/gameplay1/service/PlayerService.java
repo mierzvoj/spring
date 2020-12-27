@@ -25,6 +25,7 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
+
     public Optional<Player> findById(Long id) {
 
         return playerRepository.findById(id);
@@ -33,7 +34,8 @@ public class PlayerService {
 
 
     public Player savePlayer(Player player) {
-        return playerRepository.save(player);
+        playerRepository.save(player);
+        return player;
     }
 
     public void deletePlayer(Long id) {
@@ -43,18 +45,27 @@ public class PlayerService {
 
     public Player updatePlayer(Player player) {
 
-
         return playerRepository.save(player);
     }
 
+//    public Player attack(Long attackerId, Long defenderId) {
+//        Player attacker = playerRepository.findById(attackerId).get();
+//        Player defender = playerRepository.findById(defenderId).get();
+//
+//        playerRepository.save(damageService.attack(attacker, defender));
+//
+//        return playerRepository.findById(defenderId).get();
+//
+//    }
     public Player attack(Long attackerId, Long defenderId) {
-        Player attacker = playerRepository.findById(attackerId).get();
-        Player defender = playerRepository.findById(defenderId).get();
+        Player attacker = findById(attackerId).get();
+        Player defender = findById(defenderId).get();
 
-        attacker = DamageService.attack(attacker, defender);
+        defender = damageService.attack(attacker, defender);
 
-        return playerRepository.save(attacker);
+        playerRepository.save(defender);
 
+        return defender;
     }
 //    public Player defend(Long attackerId, Long defenderId) {
 //        Player attacker = playerRepository.findById(attackerId).get();

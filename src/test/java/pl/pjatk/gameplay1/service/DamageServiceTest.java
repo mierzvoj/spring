@@ -2,10 +2,11 @@ package pl.pjatk.gameplay1.service;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.*;
+import org.springframework.boot.test.context.*;
 import pl.pjatk.gameplay1.model.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+//@SpringBootTest
 public class DamageServiceTest {
 
     private DamageService damageService = new DamageService();
